@@ -1,6 +1,7 @@
 // import { useState } from "react";
 // import IssueCard from "../components/IssueCard/IssueCard";
 // import axios from "axios";
+import Tablero from "../components/Tablero/Tablero";
 import SelectedIncident from "../components/selectedIncident/selectedIncident";
 
 const Home = () => {
@@ -28,8 +29,11 @@ const Home = () => {
   // }
 
   
-  return (
-    <SelectedIncident />
+  return (<div className="flex flex-col">
+      <SelectedIncident />
+      <Tablero />
+  </div>
+
     // <div className='grid grid-cols-2 gap-5 mx-10 p-8'>
       
     //   <div className='w-full bg-blue flex items-center  flex-col'>
