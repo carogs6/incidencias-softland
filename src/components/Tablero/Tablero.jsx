@@ -63,9 +63,10 @@ const Tablero = () => {
     },
   ];
 
-  const incidentToDo = posts.filter((post) =>  post.column == "toDo")
+  const incidentToDo = posts.filter((post) =>  post.column === "toDo")
   const incidentinProgress = posts.filter((post) => post.column == "inProgress")
-  const incidentFinish = posts.filter((post) => {post.column == "finish"})
+  const incidentFinish = posts.filter((post) => post.column == "finish")
+  console.log('incidentToDo', incidentToDo)
 
   // const [ incidentToDoCol, setIncidentToDoCol ] = useState(incidentToDo)
   // const [ inProgresshCol, setInProgress ] = useState(incidentinProgress)
@@ -74,7 +75,7 @@ const Tablero = () => {
   return (
     <div className="flex justify-between">
       <div className="w-1/4">
-      {incidentToDo?.map((item, i) => <Incident 
+      {incidentToDo.map((item, i) => (<Incident 
             key={item.id}
             img={item.image}
             title={item.title}
@@ -88,12 +89,12 @@ const Tablero = () => {
             adjs={item.adjs}
             priority={item[i]}
         />
-)}
+))}
 
           
       </div>
       <div className="w-1/4">
-        {incidentinProgress?.map((item, i)=> {
+        {incidentinProgress?.map((item, i)=> (
             <Incident 
               key={item.id}
               img={item.image}
@@ -109,10 +110,10 @@ const Tablero = () => {
               priority={item[i]}
 
             />
-        })}
+        ))}
       </div>
       <div className="w-1/4">
-        {incidentFinish?.map((item, i)=> {
+        {incidentFinish?.map((item, i)=> (
             <Incident 
               key={item.id}
               img={item.image}
@@ -123,12 +124,12 @@ const Tablero = () => {
               responsable={item.responsable}
               hsConsumidas={item.hsConsumidas}
               hsEstimadas={item.hsEstimadas}
-              progress={item.process}
+              progress={item.progress}
               adjs={item.adjs}
               priority={item[i]}
 
             />
-        })}
+        ))}
       </div >
     </div>
   )
