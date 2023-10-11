@@ -7,9 +7,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        softlandbg: "#222933"
+        background: "#222933",
+        componentBg: "#374151",
+        buttonBg: "#3B82F6",
+        font: "#FFFFFF",
+        fontPlaceholder: "#929DAE",
+        inoutRing: "#6789B9",
+        hoverButton: "#1D4ED8"
       },
-      titilliumWeb: "'Titillium Web', 'sans-serif'"
+      titilliumWeb: "'Titillium Web', 'sans-serif'",
+      roboto: "'Roboto', 'sans-serif';"
     },
   },
   plugins: [],
