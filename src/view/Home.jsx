@@ -1,10 +1,26 @@
 // import { useState } from "react";
 // import IssueCard from "../components/IssueCard/IssueCard";
 // import axios from "axios";
+import { useEffect } from "react";
 import Tablero from "../components/Tablero/Tablero";
-import SelectedIncident from "../components/selectedIncident/selectedIncident";
+import { getIssue } from "../redux/actions/issue/getIssue";
+import { useDispatch } from "react-redux";
+// import SelectedIncident from "../components/selectedIncident/selectedIncident";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    issueList()
+  }, [])
+
+  const issueList = async () => {
+    await getIssue()(dispatch).then((response) =>{
+      console.log('hola')
+      if (response) console.log('response', response)
+
+    }).catch((error) => console.log('error', error))
+  }
 
   // const [userIssue, setUserIssue] = useState({ usuario: '', email: '', descripcion: '' });
   // const userIssue = useSelector((state) => state.issues );
@@ -30,7 +46,7 @@ const Home = () => {
 
   
   return (<div className="flex flex-col">
-      <SelectedIncident />
+      {/* <SelectedIncident /> */}
       <Tablero />
   </div>
 

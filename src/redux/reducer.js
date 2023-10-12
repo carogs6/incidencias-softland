@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   //CART
-  issues: [],
+  incients: [],
 
 };
 
@@ -15,10 +15,9 @@ const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
       //PRODUCTS
       case POST_ISSUE:
-          return { ...state, issues: payload };
+          return { ...state, incients: payload };
       case GET_ISSUES:
-        return { ...state, issues:payload }
-
+        return { ...state, incients: payload }
 
       default:
           return { ...state };

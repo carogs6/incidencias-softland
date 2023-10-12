@@ -1,45 +1,37 @@
 import axios from "axios";
 import {  BASE_URL, GET_ISSUES } from '../../action-type';
 
-export const getIssue = ({email, descripcion}) => {
+export const getIssue = () => {
   const bodyData = {
-    "fields": {
-      "project": {
-        "id": "10010"
-      },
-      "summary": `${email})`,
-      "description": {
-        "type": "doc",
-        "version": 1,
-        "content": [
-            {
-            "type": "paragraph",
-            "content": [
-                {
-                "text": descripcion,
-                "type": "text"
-                }
-            ]
-            }
-        ]
-    },
-    "reporter": {
-      "id": "712020:75da847b-f656-4020-a3fd-84d8811cd76f"
-    },
-      "issuetype": {
-        "id": "10038"
-      }
-    }
+    "expand": [
+      "names",
+      "schema",
+      "operations"
+    ],
+    "fields": [
+      "summary",
+      "status",
+      "assignee"
+    ],
+    "fieldsByKeys": false,
+    "jql": "project = FUN",
+  //   "maxResults": 15,
+    "startAt": 0
   }
-    return async (dispatch) => {
-      try {
-        const response = (await axios.post(`${BASE_URL}/rest/api/3/search`, bodyData)).data;
-        console.log('Respuesta del servidor:', response);
-        return dispatch({type: GET_ISSUES, payload: response.issues})
+    // "jql": "reporter = 'qm:c0387339-02b1-4e0d-8f36-3232066900ca:056bf32f-6d71-40be-89bc-3672d74725c3'",
+    // "fields": ["key", "summary", "customfield_10019", "description", "timespent"]
+ //    responsable, hs consumidas, comentarios, estado, hs estimadas, progreso, adjuntos, prioridad
+  // }
+  return async (dispatch) => {
+    try {
+      const response = (await axios.post(`${BASE_URL}/rest/api/3/search`, bodyData)).data;
 
-      } catch (error) {
-        console.error('Error al realizar la solicitud:', error);
-  
-      }
-    };
+      console.log('Respuesta del servidor:', response);
+      
+      return dispatch({type: GET_ISSUES, payload: response})
+    } catch (error) {
+      console.log('Error al realizar la solicitud getIssue:', error);
+      throw error; // Lanzar el error nuevamente
+    }
+  };
 };
