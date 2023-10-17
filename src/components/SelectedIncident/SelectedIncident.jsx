@@ -1,13 +1,18 @@
 /* eslint-disable react/prop-types */
 // import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
+import { getTransitions } from "../../redux/actions/transitions/getTransitions";
+import { useDispatch } from "react-redux";
 
 const SelectedIncident = ({ projects }) =>{
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   console.log('projects', projects)
 
   const handleRedirect = (key) => {
-    // getTransitions(key)
+    getTransitions(key)(dispatch).then((response) => {
+      console.log('response', response)
+    }).catch((error) => console.log('error', error))
     console.log('key', key)
 
     navigate(`/createIssue/form/${key}`)
