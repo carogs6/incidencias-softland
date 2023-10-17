@@ -5,9 +5,11 @@ export const getTransitions = (key) => {
   return async () =>{
     try {
       const response = (await axios.get(`${BASE_URL}/transitions/${key}`)).data
-        console.log('response', response)
+      console.log('response', response);
+
     } catch (error) {
-      console.log('error en getTransitions', error)
+      console.log('error en getTransitions', error);
+
     }
   }
 }
