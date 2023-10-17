@@ -2,7 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Home from './view/Home';
 import NotifyIncidentForm from './components/NotifyIncidentForm/NotifyIncidentForm';
-import NewRequirements from './view/NewRequirements/NewRequirements';
+import NewRequirements from './view/IncidentTable/IncidentTable';
+import IncidentTable from './view/IncidentTable/IncidentTable';
 // import { useSelector } from 'react-redux';
 
 const App = () => {
@@ -14,12 +15,7 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/createIssue" element={<NewRequirements />} />
-          <Route exact path="/createIssue/form/softland" element={<NotifyIncidentForm />} />
-          <Route exact path="/createIssue/form/taller" element={<NotifyIncidentForm />} />
-          <Route exact path="/createIssue/form/circuitoCompras" element={<NotifyIncidentForm />} />
-          <Route exact path="/createIssue/form/hardware" element={<NotifyIncidentForm />} />
-          <Route exact path="/createIssue/form/choferes" element={<NotifyIncidentForm />} />
-          <Route exact path="/createIssue/form/bussinesInteligent" element={<NotifyIncidentForm />} />
+          <Route exact path="/createIssue/form/:key" element={<IncidentTable />} />
           <Route exact path="/createIssue/form/nuevosRequerimientos" element={<NotifyIncidentForm />} />
         </Routes>
       </div>

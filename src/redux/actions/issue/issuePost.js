@@ -42,7 +42,7 @@ export const issuePost = ({email, descripcion}) => { //, pathname
     }
       return async (dispatch) => {
         try {
-          const response = (await axios.post(`${BASE_URL}/api/notify-incident`, bodyData)).data;
+          const response = (await axios.post(`${BASE_URL}incident/api/notify-incident`, bodyData)).data;
           console.log('Respuesta del servidor:', response);
           return dispatch({type: POST_ISSUE, payload: response.issues})
   

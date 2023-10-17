@@ -10,18 +10,6 @@ const NotifyIncidentForm = () => {
   const location = useLocation()
   const { pathname } = location;
   
-  const modulo = () => {
-    let mod = "";
-    if (pathname.includes("Softland")){ mod = "Softland";}
-    if (pathname.includes("taller")){ mod = "Taller";}
-    if (pathname.includes("circuitoCompras")){ mod = "Circuito de Compras";}
-    if (pathname.includes("hardware")){ mod = "Hardware";}
-    if (pathname.includes("choferes")){ mod = "Choferes";}
-    if (pathname.includes("bussinesInteligent")){ mod = "Bussines Inteligent";}
-    if (pathname.includes("nuevosRequerimientos")){ mod = "Nuevos Requerimientos";}
-
-    return mod
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,7 +49,7 @@ const NotifyIncidentForm = () => {
   return(
     <div className=' flex justify-center lg:px-16'>
       <div className='flex flex-col w-full lg:w-2/4'>
-        <h1 className="text-3xl font-bold w-full flex items-center justify-center font-titilliumWeb text-slate-200">Notificar incidencia en {modulo()}</h1>
+        {/* <h1 className="text-3xl font-bold w-full flex items-center justify-center font-titilliumWeb text-slate-200">Notificar incidencia en </h1> */}
         <form onSubmit={handleSubmit}>
           {/* <div className="text-red-500">
             {errors.usuario && <div>{errors.usuario}</div>}

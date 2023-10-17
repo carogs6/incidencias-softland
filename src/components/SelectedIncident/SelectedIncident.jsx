@@ -1,17 +1,19 @@
+/* eslint-disable react/prop-types */
+// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 
-const SelectedIncident = () =>{
+const SelectedIncident = ({ projects }) =>{
   const navigate = useNavigate();
+  console.log('projects', projects)
 
-  const handleRedirect = (path) => {
-    if (path == "softland") navigate("/createIssue/form/softland")
-    if (path == "taller") navigate("/createIssue/form/taller")
-    if (path == "sc") navigate("/createIssue/form/circuitoCompras")
-    if (path == "harware") navigate("/createIssue/form/hardware")
-    if (path == "choferes") navigate("/createIssue/form/choferes")
-    if (path == "bussines-inteligent") navigate("/createIssue/form/bussinesInteligent")
-    if (path == "create-new") navigate("/createIssue/form/nuevosRequerimientos")
+  const handleRedirect = (key) => {
+    // getTransitions(key)
+    console.log('key', key)
+
+    navigate(`/createIssue/form/${key}`)
   }
+
+  console.log('projects', projects)
 
   return (
     <div className="flex flex-col justify-center items-center h-[100vh]">
@@ -22,27 +24,15 @@ const SelectedIncident = () =>{
                   </h4>
         </div>
         <div className="h-full w-full mt-5 flex flex-col gap-5"> 
-            <button onClick={() => handleRedirect("softland")} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
-              Softland
-            </button>
-            <button onClick={() => handleRedirect("taller")} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
-              Taller
-            </button> 
-            <button onClick={() => handleRedirect("sc")} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
-                Circuito de Compras
-            </button>
-            <button onClick={() => handleRedirect("harware")} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
-              Hardware
-            </button>
-            <button onClick={() => handleRedirect("choferes")} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
-              Choferes
-            </button>
-            <button onClick={() => handleRedirect("bussines-inteligent")} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
-              Bussines Inteligent
-            </button>
-            <button onClick={() => handleRedirect("create-new")} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
+        {
+          projects.map((project) => 
+          <button onClick={() => handleRedirect(project.key)} key={project.key} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
+          { project.name }
+          </button>)
+        }
+        <button onClick={() => handleRedirect("create-new")} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
               Crear nuevo desarrollo
-            </button>
+        </button>
         </div>
       </div>
   </div>

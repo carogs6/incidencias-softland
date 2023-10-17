@@ -2,12 +2,15 @@ import {
   //PRODUCTS
   POST_ISSUE,
   GET_ISSUES,
+  GET_PROJECTS,
 
 } from "./action-type";
 
 const initialState = {
-  //CART
+  
   incients: [],
+
+  projects: [],
 
 };
 
@@ -18,6 +21,8 @@ const reducer = (state = initialState, { type, payload }) => {
           return { ...state, incients: payload };
       case GET_ISSUES:
         return { ...state, incients: payload }
+      case GET_PROJECTS:
+        return { ...state, projects: payload }
 
       default:
           return { ...state };

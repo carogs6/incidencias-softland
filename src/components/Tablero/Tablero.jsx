@@ -1,189 +1,130 @@
-// import { useState } from "react";
-
-import { useSelector } from "react-redux";
+/* eslint-disable react/no-unknown-property */
+import { useDispatch, useSelector } from "react-redux";
 import Incident from "../Incident/Incident";
+import { useEffect, useState } from "react";
+import { postTransition } from "../../redux/actions/transitions/postTransition";
+import { getIssue } from "../../redux/actions/issue/getIssue";
 
 const Tablero = () => {
+  const dispatch = useDispatch()
   const incidents = useSelector((state) => state.incients)
-  console.log('incidents', incidents)
-  // const posts = [
-  //   {
-  //     id:1,
-  //     image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
-  //     title: "5 Easy Tips That Will Make Your Latte Art Flourish",
-  //     description:"Latte art is quite often the most attractive thing for a new barista, and latte art is an excellent gateway to the exciting world of coffee. Latte art easy to start with, but to master latte art patterns, you need a lot practice and determination. Here are my tips that helped me to improve my latte art a few years ago!",
-  //     column: "finish",
-  //     state:"",
-  //     coments: "",
-  //     responsable: "",
-  //     hsConsumidas: "",
-  //     hsEstimadas: "",
-  //     progress: "",
-  //     adjs: "",
-  //   },
-  //   {
-  //     id:2,
-  //     image: "https://images.unsplash.com/photo-1512034400317-de97d7d6c3ed",
-  //     title: "Coffee Roasting Basics: Developing Flavour by Roasting",
-  //     description: "Caffé latte and flat white are definitely the most ordered espresso based drinks in cafés around the world but what are they really? Have you ever wondered the difference between caffé latte vs. flat white? Let's see what makes caffé latte and flat white different from each other!",
-  //     column: "inProgress",
-  //     state:"",
-  //     coments: "",
-  //     responsable: "",
-  //     hsConsumidas: "",
-  //     hsEstimadas: "",
-  //     progress: "",
-  //     adjs: "",
-  //   },
-  //   {
-  //     id:3,
-  //     image: "https://images.unsplash.com/photo-1445077100181-a33e9ac94db0",
-  //     title: "Latte vs. Flat White - What is the Difference?",
-  //     description: "I bet roasting is the thing that every barista wants to know about! We can develop flavour by roasting coffee. How can we achieve the best tasting coffee? What actually happens when roasting?",
-  //     column: "finish",
-  //     state:"",
-  //     coments: "",
-  //     responsable: "",
-  //     hsConsumidas: "",
-  //     hsEstimadas: "",
-  //     progress: "",
-  //     adjs: "",
-  //   },
-  //   {
-  //     id:4,
-  //     image:
-  //           "https://images.unsplash.com/photo-1459257868276-5e65389e2722",
-  //     title: "Creating the Perfect Espresso Recipe",
-  //     description:"Espresso recipes are important in cafés in terms of consistency and flavour. How and why are the espresso recipes made and what are the things you should consider when making a recipe for espresso? Let’s dig deeper into the world of espresso!",
-  //     column: "inProgress",
-  //     state:"",
-  //     coments: "",
-  //     responsable: "",
-  //     hsConsumidas: "",
-  //     hsEstimadas: "",
-  //     progress: "",
-  //     adjs: "",
-  //   },
-  //   {
-  //     id:5,
-  //     image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
-  //     title: "5 Easy Tips That Will Make Your Latte Art Flourish",
-  //     description:"Latte art is quite often the most attractive thing for a new barista, and latte art is an excellent gateway to the exciting world of coffee. Latte art easy to start with, but to master latte art patterns, you need a lot practice and determination. Here are my tips that helped me to improve my latte art a few years ago!",
-  //     column: "toDo",
-  //     state:"",
-  //     coments: "",
-  //     responsable: "",
-  //     hsConsumidas: "",
-  //     hsEstimadas: "",
-  //     progress: "",
-  //     adjs: "",
-  //   },
-  //   {
-  //     id:6,
-  //     image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
-  //     title: "5 Easy Tips That Will Make Your Latte Art Flourish",
-  //     description:"Latte art is quite often the most attractive thing for a new barista, and latte art is an excellent gateway to the exciting world of coffee. Latte art easy to start with, but to master latte art patterns, you need a lot practice and determination. Here are my tips that helped me to improve my latte art a few years ago!",
-  //     column: "inProgress",
-  //     state:"",
-  //     coments: "",
-  //     responsable: "",
-  //     hsConsumidas: "",
-  //     hsEstimadas: "",
-  //     progress: "",
-  //     adjs: "",
-  //   },
-  //   {
-  //     id:7,
-  //     image: "https://images.unsplash.com/photo-1445077100181-a33e9ac94db0",
-  //     title: "Latte vs. Flat White - What is the Difference?",
-  //     description: "I bet roasting is the thing that every barista wants to know about! We can develop flavour by roasting coffee. How can we achieve the best tasting coffee? What actually happens when roasting?",
-  //     column: "toDo",
-  //     state:"",
-  //     coments: "",
-  //     responsable: "",
-  //     hsConsumidas: "",
-  //     hsEstimadas: "",
-  //     progress: "",
-  //     adjs: "",
-  //   },
-  // ];
+  const [incident, setIncident] = useState(incidents)
 
-  const incidentToDo = incidents.filter((incident) =>  incident.fields.status.name === "Tareas por hacer")
-  const incidentinProgress = incidents.filter((incident) => incident.fields.status.name == "En curso")
-  const incidentFinish = incidents.filter((incident) => incident.fields.status.name == "Finalizada")
-  console.log('incidentToDo', incidentToDo)
+  useEffect(()=> {
+    getIssue()
+  }, [])
 
-  // const [ incidentToDoCol, setIncidentToDoCol ] = useState(incidentToDo)
-  // const [ inProgresshCol, setInProgress ] = useState(incidentinProgress)
-  // const [ finishCol, setFinishCol ] = useState(incidentFinish)
+  const getList = (list) => {
+    return incidents.filter((incident) =>  incident.fields.status.name == list)
+}
+
+  const startDrag = (evt, item) => {
+      evt.dataTransfer.setData('itemID', item.id)
+      console.log(item);
+  }
+
+  const draggingOver = (evt) => {
+      evt.preventDefault();
+  }
+
+  const onDrop = (evt, list) => {
+      const itemID = evt.dataTransfer.getData('itemID');
+      const item = incidents.find(item => item.id == itemID);
+      console.log('item', item)
+
+      const data = {
+        id: item.id,
+        list: list
+      }
+      postTransition(data)(dispatch).then((response) => {
+        console.log('response', response)
+      }).catch((error) => console.log('tablero L38', error))
+      item.list = list; 
+
+      const newState = incident.map(task => {
+          if(task.id === itemID) return item;
+          return task
+      })
+
+      setIncident(newState);
+  }
   
   return (
-    <div className="flex justify-center mx-20 mt-10">
-      <div className="grid grid-cols-3 gap-3 mx-2">
-        <div className="border rounded-2xl px-8 py-5">
-        {incidentToDo.map((item, i) => (
-          <Incident 
-            key={item.fields.key}
-            id={item.id}
-            img={item.image}
-            title={item.fields.summary}
-            description={item.fields.summary}
-            state={item.fields.status.name}
-            coments={item.fields.comment.comments}
-            responsable={item.fields?.assignee}
-            hsConsumidas={item.fields.timetracking.timeSpent}
-            hsEstimadas={item.fields.timetracking.remainingEstimate}
-            progress={item.process}
-            adjs={item.adjs}
-            priority={item[i]}
-
-        />
-  ))}
-
-            
+    
+      <div className="flex justify-center mx-20 mt-10">
+        <div className="grid grid-cols-3 gap-3 mx-2">
+          <div >
+            <div droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, "Por hacer"))} className="border rounded-2xl px-8 py-5 min-h-full">
+              {getList("Por hacer").map((item, i) => (
+                <div key={item.id} draggable onDragStart={(evt) => startDrag(evt, item)}>
+                  <Incident 
+                    key={item.fields.key}
+                    id={item.id}
+                    img={item.image}
+                    title={item.fields.summary}
+                    description={item.fields.summary}
+                    state={item.fields.status.name}
+                    coments={item.fields.comment.comments}
+                    responsable={item.fields?.assignee}
+                    hsConsumidas={item.fields.timetracking.timeSpent}
+                    hsEstimadas={item.fields.timetracking.remainingEstimate}
+                    progress={item.process}
+                    adjs={item.adjs}
+                    priority={item[i]}
+                  />
+                  </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, "En curso"))} className="border rounded-2xl  px-8 py-5 min-h-full">
+              {getList("En curso").map((item, i)=> (
+                <div  key={item.id} draggable onDragStart={(evt) => startDrag(evt, item)}>
+                  <Incident 
+                    key={item.fields.key}
+                    id={item.id}
+                    img={item.image}
+                    title={item.fields.summary}
+                    description={item.fields.summary}
+                    state={item.fields.status.name}
+                    coments={item.fields.comment.comments}
+                    responsable={item.fields.assignee}
+                    hsConsumidas={item.fields.timetracking.timeSpent}
+                    hsEstimadas={item.fields.timetracking.remainingEstimate}
+                    progress={item.process}
+                    adjs={item.adjs}
+                    priority={item[i]}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, "Listo"))} className="border rounded-2xl  px-8 py-5 min-h-full">
+              {getList("Listo").map((item, i)=> (
+                <div key={item.id} draggable onDragStart={(evt) => startDrag(evt, item)}>
+                  <Incident 
+                    key={item.fields.key}
+                    id={item.id}
+                    img={item.image}
+                    title={item.fields.summary}
+                    description={item.fields.summary}
+                    state={item.fields.status.name}
+                    coments={item.fields.comment.comments}
+                    responsable={item.fields.assignee}
+                    hsConsumidas={item.fields.timetracking.timeSpent}
+                    hsEstimadas={item.fields.timetracking.remainingEstimate}
+                    progress={item.process}
+                    adjs={item.adjs}
+                    priority={item[i]}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="border rounded-2xl  px-8 py-5">
-          {incidentinProgress?.map((item, i)=> (
-              <Incident 
-                key={item.fields.key}
-                id={item.id}
-                img={item.image}
-                title={item.fields.summary}
-                description={item.fields.summary}
-                state={item.fields.status.name}
-                coments={item.fields.comment.comments}
-                responsable={item.fields.assignee}
-                hsConsumidas={item.fields.timetracking.timeSpent}
-                hsEstimadas={item.fields.timetracking.remainingEstimate}
-                progress={item.process}
-                adjs={item.adjs}
-                priority={item[i]}
-
-              />
-          ))}
-        </div>
-        <div className="border rounded-2xl  px-8 py-5">
-          {incidentFinish?.map((item, i)=> (
-              <Incident 
-              key={item.fields.key}
-              id={item.id}
-              img={item.image}
-              title={item.fields.summary}
-              description={item.fields.summary}
-              state={item.fields.status.name}
-              coments={item.fields.comment.comments}
-              responsable={item.fields.assignee}
-              hsConsumidas={item.fields.timetracking.timeSpent}
-              hsEstimadas={item.fields.timetracking.remainingEstimate}
-              progress={item.process}
-              adjs={item.adjs}
-              priority={item[i]}
-
-            />
-          ))}
-        </div >
       </div>
-    </div>
+    
   )
 }
 
