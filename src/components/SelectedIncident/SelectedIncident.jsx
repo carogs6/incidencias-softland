@@ -3,14 +3,19 @@
 import { useNavigate } from "react-router-dom"
 import { getTransitions } from "../../redux/actions/transitions/getTransitions";
 import { useDispatch } from "react-redux";
+import { getIssue } from "../../redux/actions/issue/getIssue";
 
 const SelectedIncident = ({ projects }) =>{
   const dispatch = useDispatch()
   const navigate = useNavigate();
   console.log('projects', projects)
 
-  const handleRedirect = (key) => {
-    getTransitions(key)(dispatch).then((response) => {
+  const handleRedirect = async (key) => {
+    await getIssue(key)(dispatch).then((response) =>{ 
+      return console.log('response', response)
+    }).catch((error) => {throw error});
+
+    await getTransitions(key)(dispatch).then((response) => {
       console.log('response', response)
     }).catch((error) => console.log('error', error))
     console.log('key', key)
@@ -32,7 +37,7 @@ const SelectedIncident = ({ projects }) =>{
         {
           projects.map((project) => 
           <button onClick={() => handleRedirect(project.key)} key={project.key} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
-          { project.name }
+            { project.name }
           </button>)
         }
         <button onClick={() => handleRedirect("create-new")} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">

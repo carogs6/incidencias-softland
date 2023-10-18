@@ -38,7 +38,7 @@ const Tablero = () => {
       }
       postTransition(data)(dispatch).then((response) => {
         console.log('response', response)
-      }).catch((error) => console.log('tablero L38', error))
+      }).catch((error) => console.log('response tablero L38', error))
       item.list = list; 
 
       const newState = incident.map(task => {

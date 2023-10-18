@@ -1,20 +1,24 @@
 import axios from "axios";
-import {  BASE_URL, POST_ISSUE } from '../../action-type';
+import {  BASE_URL, POST_USER } from '../../action-type';
 
-export const postUser = ({name, email}) => {
-  const userData = {
-    "email": email,
-    "displayName": name
-  }
-    return async (dispatch) => {
+export const postUser = () => {
+  return async (dispatch) => {
+    
+      const userData = {
+        email: "Clienteaplicacion@jira.com",
+        displayName: "cliente desde app"
+      }
       try {
-        const response = (await axios.post(`${BASE_URL}/`, userData)).data;
-        console.log('Respuesta del servidor:', response);
-        return dispatch({type: POST_ISSUE, payload: response.issues})
+        const response = (await axios.post(`${BASE_URL}/user/customer`, userData)).data;
+        console.log('Respuesta del servidor a postUser:', response);
+
+        dispatch({type: POST_USER, payload: response})
+
+        return response
 
       } catch (error) {
-        console.error('Error al realizar la solicitud:', error);
-  
+        console.error('Error al realizar la solicitud postUser:', error);
+
       }
     };
 };

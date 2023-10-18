@@ -1,8 +1,8 @@
 import axios from "axios";
 import {  BASE_URL, GET_ISSUES } from '../../action-type';
 
-export const getIssue = () => {
-  let key = "FUN";
+export const getIssue = (key) => {
+
 
   const bodyData = {
     "expand": [
