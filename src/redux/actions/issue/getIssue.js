@@ -28,9 +28,9 @@ export const getIssue = (key) => {
       const response = (await axios.post(`${BASE_URL}/incident/search`, bodyData)).data;
 
       console.log('Respuesta del servidor:', response);
-      
-      return dispatch({type: GET_ISSUES, payload: response})
+      dispatch({type: GET_ISSUES, payload: response})
 
+      return response
     } catch (error) {
       console.log('Error al realizar la solicitud getIssue');
 

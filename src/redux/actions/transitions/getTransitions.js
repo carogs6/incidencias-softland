@@ -1,11 +1,13 @@
 import axios from "axios";
-import { BASE_URL } from "../../action-type";
+import { BASE_URL, GET_TRANSITIONS } from "../../action-type";
 
 export const getTransitions = (key) => {
-  return async () =>{
+  return async (dispatch) =>{
     try {
       const response = (await axios.get(`${BASE_URL}/transitions/${key}`)).data
-      console.log('response', response);
+      console.log('response', response.transitions);
+
+      dispatch({type: GET_TRANSITIONS, payload: response.transitions})
 
     } catch (error) {
       console.log('error en getTransitions', error);

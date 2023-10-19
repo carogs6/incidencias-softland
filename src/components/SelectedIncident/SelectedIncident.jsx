@@ -8,22 +8,26 @@ import { getIssue } from "../../redux/actions/issue/getIssue";
 const SelectedIncident = ({ projects }) =>{
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  console.log('projects', projects)
 
   const handleRedirect = async (key) => {
+
     await getIssue(key)(dispatch).then((response) =>{ 
-      return console.log('response', response)
+      if (response){
+        console.log('response[0]', response)
+        searchTransition(response[0].key)
+      }
+      return console.log('response SelectedIncident getIssue', response)
     }).catch((error) => {throw error});
 
-    await getTransitions(key)(dispatch).then((response) => {
-      console.log('response', response)
-    }).catch((error) => console.log('error', error))
-    console.log('key', key)
-
     navigate(`/createIssue/form/${key}`)
+    
   }
 
-  console.log('projects', projects)
+  const searchTransition =  async (key) => {
+    await getTransitions(key)(dispatch).then((response) => {
+      console.log('response SelectedIncident getTransitions', response)
+    }).catch((error) => console.log('error', error))
+  }
 
   return (
     <div className="flex flex-col justify-center items-center h-[100vh]">
@@ -41,7 +45,7 @@ const SelectedIncident = ({ projects }) =>{
           </button>)
         }
         <button onClick={() => handleRedirect("create-new")} className="rounded-xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-500 px-5 py-3 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50">
-              Crear nuevo desarrollo
+          Crear nuevo desarrollo
         </button>
         </div>
       </div>

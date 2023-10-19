@@ -6,4 +6,6 @@ export const GET_ISSUES = "GET_ISSUES";
 
 export const GET_PROJECTS = "GET_PROJECTS";
 
+export const GET_TRANSITIONS = "GET_TRANSITIONS";
+
 export const POST_USER = "POST_USER";

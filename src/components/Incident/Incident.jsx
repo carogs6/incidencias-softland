@@ -7,14 +7,14 @@ const Incident = (prop) => {
       {/* <img src={prop.img} alt="" className="h-64 "/> */}
       <p>{prop.description}</p>
       {/* <p>{prop.state}</p> */}
-      <p>{prop.coments}</p>
+      {/* <p>{prop.coments}</p> */}
       <div>
         {/* {prop.responsable && prop.responsable} */}
       </div>
-      <p>Tiempo invertido: {prop.hsConsumidas}</p>
+      {/* <p>Tiempo invertido: {prop.hsConsumidas}</p>
       <p>Tiempo estimado: {prop.hsEstimadas}</p>
       <p>{prop.process}</p>
-      <p>{prop.priority}</p>
+      <p>{prop.priority}</p> */}
     </div>
   )
 }

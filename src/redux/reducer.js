@@ -4,6 +4,7 @@ import {
   GET_ISSUES,
   GET_PROJECTS,
   POST_USER,
+  GET_TRANSITIONS,
 
 } from "./action-type";
 
@@ -14,6 +15,8 @@ const initialState = {
   projects: [],
 
   user: {},
+
+  transitions: [],
 
 };
 
@@ -28,6 +31,8 @@ const reducer = (state = initialState, { type, payload }) => {
         return { ...state, projects: payload }
       case POST_USER:
         return { ...state, user: payload }
+      case GET_TRANSITIONS:
+        return { ...state, transitions: payload }
 
       default:
           return { ...state };

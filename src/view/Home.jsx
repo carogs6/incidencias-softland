@@ -6,7 +6,6 @@ import { getProjects } from "../redux/actions/projects/getProjects";
 const Home = () => {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.projects);
-  console.log('projects', projects)
 
   useEffect(() => {
     issueList()
@@ -15,14 +14,13 @@ const Home = () => {
 
   const issueList = async () => {
     await getProjects()(dispatch).then((response) =>{ 
-      return console.log('response', response)
+      return console.log('response Home getProjects', response)
     }).catch((error) => {throw error})
 
-    
   }
 
-  
-  return (<div className="flex flex-col">
+  return (
+  <div className="flex flex-col">
       <SelectedIncident projects={projects} />
   </div>
   )
