@@ -15,8 +15,8 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/createIssue" element={<NewRequirements />} />
-          <Route exact path="/createIssue/form/:key" element={<IncidentTable />} />
-          <Route exact path="/createIssue/form/nuevosRequerimientos" element={<NotifyIncidentForm />} />
+          <Route exact path="/board/:key" element={<IncidentTable />} />
+          <Route exact path="/createIssue/form/:key" element={<NotifyIncidentForm />} />
         </Routes>
       </div>
     </BrowserRouter>

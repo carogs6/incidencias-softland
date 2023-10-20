@@ -1,32 +1,34 @@
 /* eslint-disable react/prop-types */
-// import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import { getTransitions } from "../../redux/actions/transitions/getTransitions";
 import { useDispatch } from "react-redux";
 import { getIssue } from "../../redux/actions/issue/getIssue";
+import { getBoard } from "../../redux/actions/board/getBoard";
 
 const SelectedIncident = ({ projects }) =>{
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
   const handleRedirect = async (key) => {
+    await getBoard(key)(dispatch).then((response) =>{ 
+      return console.log('response SelectedIncident getBoard', response);
+    }).catch((error) => {throw error});
 
     await getIssue(key)(dispatch).then((response) =>{ 
       if (response){
-        console.log('response[0]', response)
-        searchTransition(response[0].key)
+        searchTransition(response[0].key);
       }
-      return console.log('response SelectedIncident getIssue', response)
+      return console.log('response SelectedIncident getIssue', response);
     }).catch((error) => {throw error});
 
-    navigate(`/createIssue/form/${key}`)
+    navigate(`board/${key}`)
     
   }
 
   const searchTransition =  async (key) => {
     await getTransitions(key)(dispatch).then((response) => {
-      console.log('response SelectedIncident getTransitions', response)
-    }).catch((error) => console.log('error', error))
+      console.log('response SelectedIncident getTransitions', response);
+    }).catch((error) => console.log('error', error));
   }
 
   return (

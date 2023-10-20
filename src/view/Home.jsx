@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SelectedIncident from "../components/selectedIncident/selectedIncident";
 import { getProjects } from "../redux/actions/projects/getProjects";
+// import NotifyIncidentForm from "../components/NotifyIncidentForm/NotifyIncidentForm"
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Home = () => {
   return (
   <div className="flex flex-col">
       <SelectedIncident projects={projects} />
+      {/* <NotifyIncidentForm /> */}
   </div>
   )
 }

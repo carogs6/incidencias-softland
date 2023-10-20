@@ -10,7 +10,6 @@ export const postUser = () => {
       }
       try {
         const response = (await axios.post(`${BASE_URL}/user/customer`, userData)).data;
-        console.log('Respuesta del servidor a postUser:', response);
 
         dispatch({type: POST_USER, payload: response})
 

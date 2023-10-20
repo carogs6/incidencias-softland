@@ -2,14 +2,13 @@ import { useState } from "react";
 import { issuePost } from "../../redux/actions/issue/issuePost";
 import { useLocation } from "react-router-dom";
 
-const NotifyIncidentForm = () => {
+const NotifyIncidentForm = (key) => {
   const [usuario, setUsuario] = useState('');
   const [email, setEmail] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [errors, setErrors] = useState({ usuario: '', email: '', descripcion: '' });
   const location = useLocation()
   const { pathname } = location;
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +34,7 @@ const NotifyIncidentForm = () => {
 
       // Restablece los mensajes de error en caso de éxito
       setErrors({ usuario: '', email: '', descripcion: '' });
-      const data = {usuario, email, descripcion, pathname}
+      const data = {key, usuario, email, descripcion, pathname}
       // Ahora, realiza la solicitud POST usando axios
       await issuePost(data).then((response)=>{
         console.log('action response', response)
@@ -47,9 +46,8 @@ const NotifyIncidentForm = () => {
   }
 
   return(
-    <div className=' flex justify-center lg:px-16'>
+    <div className=' flex justify-center mx-3 lg:px-16'>
       <div className='flex flex-col w-full lg:w-2/4'>
-        {/* <h1 className="text-3xl font-bold w-full flex items-center justify-center font-titilliumWeb text-slate-200">Notificar incidencia en </h1> */}
         <form onSubmit={handleSubmit}>
           {/* <div className="text-red-500">
             {errors.usuario && <div>{errors.usuario}</div>}
@@ -61,7 +59,7 @@ const NotifyIncidentForm = () => {
               <div className="mt-8 grid grid-cols-1 gap-x-2 gap-y-4">
                 <div className="">
                   <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-slate-100">
-                    Usuario
+                    Usuario*
                   </label>
                   <div className="mt-2">
                     <input
@@ -77,7 +75,7 @@ const NotifyIncidentForm = () => {
                 </div>
                 <div className="">
                   <label htmlFor="email" className="block text-sm font-medium leading-6 text-slate-100">
-                    Email
+                    Email*
                   </label>
                   <div className="mt-1">
                     <input
@@ -93,7 +91,7 @@ const NotifyIncidentForm = () => {
                 </div>
                 <div className='mt-1'>
                   <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-slate-100">
-                    Incidencia
+                    Incidencia*
                   </label>
                   <div className="mt-1">
                     <textarea

@@ -1,6 +1,5 @@
 // eslint-disable-next-line react/prop-types
 const IssueCard = ({ summary, description }) => {
-  console.log('description', description)
   return (
     <div className="flex flex-col gap-4 bg-gray-700 p-4 rounded-lg">
       <div className="flex justify justify-between">

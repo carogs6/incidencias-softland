@@ -1,16 +1,8 @@
 import axios from "axios";
 import {  BASE_URL, POST_ISSUE } from '../../action-type';
 
-export const issuePost = ({email, descripcion}) => { //, pathname
-  // const modulo = () => {
-    // let mod = "";
-    // if (pathname.includes("Softland")){ mod = {"id": "10014", "issuetype": "10014"}}
-    // if (pathname.includes("taller")){ mod = {"id": "10014", "issuetype": "10014"}}
-    // if (pathname.includes("circuitoCompras")){ mod = {"id": "10010", "issuetype": "10045"};}
-    // if (pathname.includes("hardware")){ mod = {"id": "10010", "issuetype": "10045"};}
-    // if (pathname.includes("choferes")){ mod = {"id": "10010", "issuetype": "10045"};}
-    // if (pathname.includes("bussinesInteligent")){ mod = {"id": "10010", "issuetype": "10045"};}
-    // if (pathname.includes("nuevosRequerimientos")){ mod = {"id": "10010", "issuetype": "10045"};}
+export const issuePost = ({email, descripcion}) => { 
+  
     const bodyData = {
       "fields": {
         "project": {
@@ -43,7 +35,6 @@ export const issuePost = ({email, descripcion}) => { //, pathname
       return async (dispatch) => {
         try {
           const response = (await axios.post(`${BASE_URL}incident/api/notify-incident`, bodyData)).data;
-          console.log('Respuesta del servidor:', response);
           return dispatch({type: POST_ISSUE, payload: response.issues})
   
         } catch (error) {
